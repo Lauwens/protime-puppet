@@ -28,31 +28,31 @@ CLI automation for Trescal MyProtime (calendar actions, check-in/out, and absenc
 Run the CLI via Bun:
 
 ```bash
-bun run start
+bun start clock
 ```
 
 Commands:
 
 - `login` - opens a browser for login (headful). Use `--manual` to skip automated login.
-- `run` - runs the full automation flow (headless): navigates to the calendar, opens today, optionally requests "Thuiswerk", and adds a clocking entry.
+- `clock` - runs the full automation flow (headless): navigates to the calendar, opens today, optionally requests "Thuiswerk", and adds a clocking entry.
 
 Examples:
 
 ```bash
 # Automated login
-bun run start -- login
+bun start login
 
 # Manual login
-bun run start -- login --manual
+bun start login --manual
 
 # Full automation
-bun run start
+bun start clock
 ```
 
 ## Notes
 
 - Browser session data is stored in `.user_data` so your login can persist.
-- The `run` command decides check-in vs. check-out based on the current hour (< 10:00 = check-in).
+- The `clock` command decides check-in vs. check-out based on the current hour (< 10:00 = check-in).
 - The target URL comes from `PROTIME_URL` (e.g. `https://trescal.myprotime.eu`).
 
 System-wide (Windows)

@@ -55,7 +55,7 @@ program
   });
 
 program
-  .command("run")
+  .command("clock")
   .description("Run automation on the calendar (automated login if needed)")
   .action(async () => {
     const automation = new BrowserAutomation();
