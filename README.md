@@ -24,7 +24,7 @@ CLI automation for Trescal MyProtime (calendar actions, check-in/out, and absenc
 Run the CLI via Bun:
 
 ```bash
-bun run start -- <command>
+bun run start
 ```
 
 Commands:
@@ -42,7 +42,7 @@ bun run start -- login
 bun run start -- login --manual
 
 # Full automation
-bun run start -- run
+bun run start
 ```
 
 ## Notes
