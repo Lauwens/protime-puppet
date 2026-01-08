@@ -220,7 +220,7 @@ program
       console.log(`Typing time: ${timeToType}`);
       await page.type(timeInputSelector, timeToType, { delay: 100 });
 
-      //await page.keyboard.press("Enter");
+      await page.keyboard.press("Enter");
 
       console.log("Automation steps completed successfully.");
       await automation.wait(5000); // Increased wait to see the final input before closing
