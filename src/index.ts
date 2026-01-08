@@ -62,7 +62,7 @@ program
     try {
       console.log(`Navigating to ${TARGET_URL}...`);
       await automation.init(true); // Headless for run
-      await automation.goto(TARGET_URL);
+      await automation.goto(TARGET_URL + "/calendar/person/me");
 
       // Try to login if we see the login form
       await automation.login();
@@ -220,7 +220,7 @@ program
       console.log(`Typing time: ${timeToType}`);
       await page.type(timeInputSelector, timeToType, { delay: 100 });
 
-      await page.keyboard.press("Enter");
+      //await page.keyboard.press("Enter");
 
       console.log("Automation steps completed successfully.");
       await automation.wait(5000); // Increased wait to see the final input before closing

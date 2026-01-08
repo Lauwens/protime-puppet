@@ -18,6 +18,10 @@ CLI automation for Trescal MyProtime (calendar actions, check-in/out, and absenc
    cp .env.example .env
    ```
    Fill in `USER_EMAIL`, `USER_PASSWORD`, and `PROTIME_URL` in `.env`.
+3. Install browser dependencies:
+   ```bash
+   npx puppeteer browsers install chrome
+   ```
 
 ## Usage
 
