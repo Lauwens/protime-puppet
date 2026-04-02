@@ -60,7 +60,7 @@ program
   .action(async () => {
     const automation = new BrowserAutomation();
     try {
-      console.log(`Navigating to ${TARGET_URL}...`);
+      console.log(`Navigating to ${TARGET_URL}/calendar/person/me`);
       await automation.init(true); // Headless for run
       await automation.goto(TARGET_URL + "/calendar/person/me");
 
@@ -78,26 +78,29 @@ program
       console.log(`Looking for current day cell: ${cellSelector}`);
 
       // 2. Wait for the cell and find the button inside it
-      await page.waitForSelector(cellSelector, { timeout: 10000 });
+      await page.waitForSelector(cellSelector, { timeout: 20000 });
       const cell = await page.$(cellSelector);
       if (!cell)
         throw new Error(`Could not find today's cell (${cellSelector})`);
 
       const button = await cell.$("button");
-      if (!button) throw new Error("Could not find a button inside the cell");
-
-      console.log("Clicking the button in the calendar cell...");
-      await button.click();
+      if (!button) {
+        console.log("Clicking the calendar cell...");
+        await cell.click();
+      } else {
+        console.log("Clicking the button in the calendar cell...");
+        await button.click();
+      }
 
       // 3. Wait for the context menu to appear
       console.log("Waiting for context menu...");
       const menuSelector = '[data-testid="context-menu"]';
-      await page.waitForSelector(menuSelector, { timeout: 10000 });
+      await page.waitForSelector(menuSelector, { timeout: 20000 });
 
       // 4. Click the "Bekijk dagdetails" option
       const itemSelector = '[data-testid="contextItem_Bekijk dagdetails"]';
       console.log(`Clicking menu item: ${itemSelector}`);
-      await page.waitForSelector(itemSelector, { timeout: 10000 });
+      await page.waitForSelector(itemSelector, { timeout: 20000 });
       await page.click(itemSelector);
 
       // CRITICAL: Wait for the side panel to appear before checking status
@@ -130,13 +133,13 @@ program
         console.log(
           `Clicking Afwezigheid aanvragen menu item: ${absenceSelector}`,
         );
-        await page.waitForSelector(absenceSelector, { timeout: 10000 });
+        await page.waitForSelector(absenceSelector, { timeout: 20000 });
         await page.click(absenceSelector);
 
-        // Select thuiswerk option
+        Select thuiswerk option
         console.log('Selecting "Thuiswerk" from dropdown...');
         const selectSelector = "#definitionId";
-        await page.waitForSelector(selectSelector, { timeout: 10000 });
+        await page.waitForSelector(selectSelector, { timeout: 20000 });
 
         await page.evaluate(() => {
           const select = document.querySelector(
@@ -179,7 +182,7 @@ program
         // 7. Type the time into the specific input
         const durationInputSelector = "#duration";
         console.log(`Waiting for duration input: ${durationInputSelector}`);
-        await page.waitForSelector(durationInputSelector, { timeout: 10000 });
+        await page.waitForSelector(durationInputSelector, { timeout: 20000 });
 
         // Click to ensure focus and clear potential default values
         await page.click(durationInputSelector, { clickCount: 3 });
@@ -198,20 +201,20 @@ program
 
       // 5. Always add the clocking entry
       console.log(`Clicking add item for clocking: ${panelAddButton}`);
-      await page.waitForSelector(panelAddButton, { timeout: 10000 });
+      await page.waitForSelector(panelAddButton, { timeout: 20000 });
       await page.click(panelAddButton);
 
       // 6. Click the "Boeking aanvragen" option
       const boekingSelector = '[data-testid="RequestClocking-option"]';
 
       console.log(`Clicking Boeking aanvragen menu item: ${boekingSelector}`);
-      await page.waitForSelector(boekingSelector, { timeout: 10000 });
+      await page.waitForSelector(boekingSelector, { timeout: 20000 });
       await page.click(boekingSelector);
 
       // 7. Type the time into the specific input
       const timeInputSelector = "#time";
       console.log(`Waiting for time input: ${timeInputSelector}`);
-      await page.waitForSelector(timeInputSelector, { timeout: 10000 });
+      await page.waitForSelector(timeInputSelector, { timeout: 20000 });
 
       // Click to ensure focus and clear potential default values
       await page.click(timeInputSelector, { clickCount: 3 });

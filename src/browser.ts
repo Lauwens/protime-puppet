@@ -49,20 +49,23 @@ export class BrowserAutomation {
     }
 
     try {
-      console.log("Attempting automated login...");
+      const currentUrl = this.page.url();
+      if (!currentUrl.includes("login")) {
+        console.log("Not on login page, skipping login.");
+        return false;
+      }
+
+      console.log("Login page detected, attempting automated login...");
       await this.page.waitForSelector("#Email", { timeout: 10000 });
       await this.page.type("#Email", email);
       await this.page.type("#Password", password);
-
-      // Look for the submit button - typically the next button or a submit input
-      // Since specific selector for button was not provided, we press Enter or find first submit
       await this.page.keyboard.press("Enter");
 
       // Wait for navigation after login
       await this.page.waitForNavigation({ waitUntil: "networkidle2" });
       return true;
     } catch (error) {
-      console.log("Login form not found or already logged in.");
+      console.log("Login failed or form not found.");
       return false;
     }
   }
