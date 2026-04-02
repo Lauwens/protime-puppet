@@ -1,11 +1,11 @@
 # protime-puppet
 
-CLI automation for Trescal MyProtime (calendar actions, check-in/out, and absence request) using Puppeteer.
+CLI automation for MyProtime (calendar actions, check-in/out, and absence request) using Puppeteer.
 
 ## Requirements
 
 - Bun
-- A Trescal MyProtime account
+- A MyProtime account
 
 ## Setup
 
