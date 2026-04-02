@@ -136,7 +136,7 @@ program
         await page.waitForSelector(absenceSelector, { timeout: 20000 });
         await page.click(absenceSelector);
 
-        Select thuiswerk option
+        // Select thuiswerk option
         console.log('Selecting "Thuiswerk" from dropdown...');
         const selectSelector = "#definitionId";
         await page.waitForSelector(selectSelector, { timeout: 20000 });
